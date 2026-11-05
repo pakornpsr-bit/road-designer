@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Street Section Designer V6.11</title>
+<title>Street Section Designer V6.12</title>
 <!--
-  Street Section Designer V6.11  (ต่อยอดจาก StreetSection V4)
+  Street Section Designer V6.12  (ต่อยอดจาก StreetSection V4)
   ไฟล์ภาพที่ V4 ใช้ (วางในโฟลเดอร์เดียวกับไฟล์นี้): car-back-view.png, car-front-view.png, tree.png, "bus shelter.png"
   หากไม่มีไฟล์ภาพ โปรแกรมจะใช้สัญลักษณ์เวกเตอร์แทนโดยอัตโนมัติ
 -->
@@ -137,12 +137,17 @@ table.boq input{padding:3px 5px;font-size:12.5px}
 #ci-modal svg{width:100%;height:56vh;background:#f8fafc;border:1px solid #cbd5e1;border-radius:6px;touch-action:none}
 #ci-modal .row{display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin-top:8px}
 #ci-modal .row .form-group{margin:0;min-width:110px;flex:1}
+
+#disc-bar{position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fef3c7;color:#78350f;font-size:11px;line-height:1.35;padding:4px 12px;border-top:1px solid #f59e0b;text-align:center}
+#disc-modal{position:fixed;inset:0;z-index:100;background:rgba(15,23,42,.6);display:flex;align-items:center;justify-content:center;padding:16px}
+#disc-modal .box{background:#fff;max-width:520px;border-radius:10px;padding:20px 22px;font-size:14px;line-height:1.6;color:#0f172a}
+#disc-modal button{margin-top:12px;padding:8px 22px;border:none;border-radius:6px;background:#2563eb;color:#fff;font-weight:700;font-family:inherit;font-size:14px;cursor:pointer}
 </style>
 </head>
 <body>
 <div id="app">
  <div id="sidebar">
-  <div class="header"><h2>Street Section Designer V6.11</h2><p>รูปตัด • ผัง • ราคา • แบบก่อสร้าง — ตรวจ Clash อัตโนมัติ</p></div>
+  <div class="header"><h2>Street Section Designer V6.12</h2><p>รูปตัด • ผัง • ราคา • แบบก่อสร้าง — ตรวจ Clash อัตโนมัติ</p></div>
 
   <div class="stabs"><button type="button" class="stab" data-st="1">① โครงการ<small>ข้อมูลทั่วไป • ขนาด Element</small></button><button type="button" class="stab active" data-st="2">② โครงสร้างหน้าตัด<small>ความกว้าง • เลือก Element</small></button><button type="button" class="stab" data-st="3">③ รายละเอียด<small>ของชิ้นส่วนที่เลือก</small></button></div>
   <div id="sp-1" style="display:none"><div class="box" id="projbox">
@@ -2909,6 +2914,12 @@ function ciFields() {
   document.getElementById('ci-under').addEventListener('change', ciDraw);
 })();
 renderCustomImgs();
+</script>
+<div id="disc-bar">⚠ สงวนสิทธิ์: โปรแกรมนี้ใช้ประกอบการออกแบบเบื้องต้นและตรวจสอบแนวคิดเท่านั้น ผลลัพธ์ทั้งหมด (รูปตัด ปริมาณงาน ราคา การตรวจชน แบบ) ผู้ออกแบบต้องตรวจสอบกับมาตรฐานและข้อกำหนดที่เกี่ยวข้องก่อนนำไปใช้งานจริง ผู้พัฒนาไม่รับผิดชอบต่อความเสียหายที่เกิดจากการนำไปใช้ ตารางขนาดและราคาเป็นข้อมูลตัวอย่าง ผู้ใช้ต้องกรอกและตรวจสอบเอง</div>
+<div id="disc-modal" style="display:none"><div class="box"><b>ข้อความสงวนสิทธิ์</b><br>โปรแกรมนี้ใช้ประกอบการออกแบบเบื้องต้นและตรวจสอบแนวคิดเท่านั้น ผลลัพธ์ทั้งหมด (รูปตัด ปริมาณงาน ราคา การตรวจชน แบบ) ผู้ออกแบบต้องตรวจสอบกับมาตรฐานและข้อกำหนดที่เกี่ยวข้องก่อนนำไปใช้งานจริง ผู้พัฒนาไม่รับผิดชอบต่อความเสียหายที่เกิดจากการนำไปใช้ ตารางขนาดและราคาเป็นข้อมูลตัวอย่าง ผู้ใช้ต้องกรอกและตรวจสอบเอง<br><button onclick="discOK()">รับทราบ</button></div></div>
+<script>
+function discOK(){ var m=document.getElementById('disc-modal'); if(m) m.style.display='none'; try{ sessionStorage.setItem('disc_ok','1'); }catch(e){} }
+(function(){ var ok=false; try{ ok=sessionStorage.getItem('disc_ok')==='1'; }catch(e){} if(!ok) document.getElementById('disc-modal').style.display='flex'; })();
 </script>
 </body>
 </html>
